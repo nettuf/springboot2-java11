@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.nettuf.course.entities.Category;
 import com.nettuf.course.entities.Order;
+import com.nettuf.course.entities.OrderItem;
 import com.nettuf.course.entities.Product;
 import com.nettuf.course.entities.User;
 import com.nettuf.course.entities.enums.OrderStatus;
 import com.nettuf.course.repositories.CategoryRepository;
+import com.nettuf.course.repositories.OrderItemRepository;
 import com.nettuf.course.repositories.OrderRepository;
 import com.nettuf.course.repositories.ProductRepository;
 import com.nettuf.course.repositories.UserRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -68,6 +73,14 @@ public class TestConfig implements CommandLineRunner{
 		
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2); 
+		OrderItem oi2 = new OrderItem(o1, p3, 1); 
+		OrderItem oi3 = new OrderItem(o2, p3, 2); 
+		OrderItem oi4 = new OrderItem(o3, p5, 2); 
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
 		
 	}
 	
